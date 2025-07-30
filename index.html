@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tanishq Ji Numerology</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Tanishq Ji Numerology</h2>
+    <p>Enter your Date of Birth:</p>
+    <input type="date" id="dob" />
+    <br>
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function reduceToSingleDigit(num) {
+      while (num > 9) {
+        num = num.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+      }
+      return num;
+    }
+
+    function calculate() {
+      const dobInput = document.getElementById("dob").value;
+      if (!dobInput) {
+        alert("Please enter your date of birth.");
+        return;
+      }
+
+      const date = new Date(dobInput);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+
+      const psychic = reduceToSingleDigit(day);
+      const destiny = reduceToSingleDigit(
+        [...\`\${day}\${month}\${year}\`].map(Number).reduce((a, b) => a + b, 0)
+      );
+
+      document.getElementById("result").innerHTML = `
+        <p><strong>Psychic Number:</strong> \${psychic}</p>
+        <p><strong>Destiny Number:</strong> \${destiny}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
